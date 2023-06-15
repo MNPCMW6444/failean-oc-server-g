@@ -3,16 +3,11 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose, { ConnectOptions } from "mongoose";
 import cookieParser from "cookie-parser";
-import authRouter from "./app/routers/auth/authRouter";
-import websiteRouter from "./app/routers/website/websiteRouter";
-import dataRouter from "./app/routers/data/dataRouter";
-import promptMap from "./content/prompts/promptMap";
-import { convertMaptoDepGraph } from "./app/util/data/promptUtil";
 
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 6555;
+const port = process.env.PORT || 6777;
 app.use(cookieParser());
 
 let mainDbStatus = false;
@@ -56,7 +51,3 @@ app.listen(port, () => console.log(`Server started on port: ${port}`));
 app.get("/areyoualive", (_, res) => {
   res.json({ answer: "yes", version: process.env.npm_package_version });
 });
-
-app.use("/auth", authRouter);
-app.use("/website", websiteRouter);
-app.use("/data", dataRouter);
