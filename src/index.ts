@@ -4,11 +4,24 @@ import dotenv from "dotenv";
 import mongoose, { ConnectOptions } from "mongoose";
 import cookieParser from "cookie-parser";
 
-dotenv.config();
 
+
+dotenv.config();
 const app = express();
 const port = process.env.PORT || 6777;
 app.use(cookieParser());
+
+app.get("/api/token-analytics", (_, res) => {
+  // Fetch token analytics data from your data source (e.g., database)
+  const tokenData = [
+    { userId: "user1", consumedTokens: 50 },
+    { userId: "user2", consumedTokens: 80 },
+    { userId: "user3", consumedTokens: 30 },
+    // Add more token data here
+  ];
+
+  res.json(tokenData);
+});
 
 let mainDbStatus = false;
 
