@@ -10,21 +10,33 @@ const app = express();
 const port = process.env.PORT || 6777;
 app.use(cookieParser());
 
-let mainDbStatus = false;
+let ocDBStatus = false;
+let safeDBStatus = false;
 
-const connectToDBs = () => {
+export let ocDB: mongoose.Connection, safeDB: mongoose.Connection;
+
+const connectToDBs = async () => {
   try {
-    mongoose.connect("" + process.env.SAFE, {
+    ocDB = await mongoose.createConnection("" + process.env.OC, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     } as ConnectOptions);
-    mainDbStatus = true;
+
+    safeDB = await mongoose.createConnection("" + process.env.SAFE, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    } as ConnectOptions);
+
+    ocDBStatus = true;
+    safeDBStatus = true;
   } catch (e) {
     console.error(e);
-    mainDbStatus = false;
+    ocDBStatus = false;
+    safeDBStatus = false;
   }
-  if (!mainDbStatus) setTimeout(connectToDBs, 180000);
-  else console.log("connected to safe-mongo");
+
+  if (!ocDBStatus || !safeDBStatus) setTimeout(connectToDBs, 180000);
+  else console.log("connected to main-mongo and oc-mongo");
 };
 
 connectToDBs();
@@ -33,15 +45,12 @@ app.use(express.json());
 
 export const clientDomain =
   process.env.NODE_ENV === "development"
-    ? "http://localhost:5999"
-    : "https://dev.failean.com";
+    ? ["http://localhost:5998", "http://localhost:5999"]
+    : ["https://oc.failean.com", "https://dev.failean.com"];
 
 app.use(
   cors({
-    origin:
-      process.env.NODE_ENV === "development"
-        ? ["http://localhost:5999"]
-        : [`${clientDomain}`],
+    origin: clientDomain,
     credentials: true,
   })
 );
