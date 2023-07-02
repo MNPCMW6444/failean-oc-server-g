@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@failean/mongo-models": "^1.6.117",
-    "@failean/shared-types": "^2.9.145",
+    "@failean/shared-types": "^2.9.146",
     "@sendgrid/mail": "^7.7.0",
     "@types/bcrypt": "^5.0.0",
     "@types/cookie-parser": "^1.4.3",
