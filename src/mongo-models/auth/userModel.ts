@@ -1,5 +1,8 @@
 import { WhiteModels } from "@failean/shared-types";
 import { userModel } from "@failean/mongo-models";
-import { safeDB } from "../../index";
+import { safeDB } from "../../dbConnection";
 
-export default safeDB.model<WhiteModels.Auth.WhiteUser>("user", userModel);
+export const getUserModel = () => {
+  if (!safeDB) throw new Error("Database not initialized");
+  return safeDB.model<WhiteModels.Auth.WhiteUser>("user", userModel);
+};
