@@ -3,41 +3,15 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose, { ConnectOptions } from "mongoose";
 import cookieParser from "cookie-parser";
+import logRouter from "./routers/log/logRouter";
+import readRouter from "./routers/read/readRouter";
+import { connectToDBs } from "./dbConnection";
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 6777;
 app.use(cookieParser());
-
-let ocDBStatus = false;
-let safeDBStatus = false;
-
-export let ocDB: mongoose.Connection, safeDB: mongoose.Connection;
-
-const connectToDBs = async () => {
-  try {
-    ocDB = await mongoose.createConnection("" + process.env.OC, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    } as ConnectOptions);
-
-    safeDB = await mongoose.createConnection("" + process.env.SAFE, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    } as ConnectOptions);
-
-    ocDBStatus = true;
-    safeDBStatus = true;
-  } catch (e) {
-    console.error(e);
-    ocDBStatus = false;
-    safeDBStatus = false;
-  }
-
-  if (!ocDBStatus || !safeDBStatus) setTimeout(connectToDBs, 180000);
-  else console.log("connected to main-mongo and oc-mongo");
-};
 
 connectToDBs();
 
@@ -60,3 +34,6 @@ app.listen(port, () => console.log(`Server started on port: ${port}`));
 app.get("/areyoualive", (_, res) => {
   res.json({ answer: "yes", version: process.env.npm_package_version });
 });
+
+app.use("/log", logRouter);
+app.use("/read", readRouter);

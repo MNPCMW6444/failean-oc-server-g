@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import { ocDB } from "../index";
 import { OCModels } from "@failean/shared-types";
+import { ocDB } from "../dbConnection";
 
 const restRequestModel = new mongoose.Schema(
   {
@@ -14,7 +14,9 @@ const restRequestModel = new mongoose.Schema(
   }
 );
 
-export default ocDB.model<OCModels.RestRequest>(
-  "restRequest",
-  restRequestModel
-);
+export function getRestRequestModel() {
+  if (!ocDB) {
+    throw new Error("Database not initialized");
+  }
+  return ocDB.model<OCModels.RestRequest>("restRequest", restRequestModel);
+}
