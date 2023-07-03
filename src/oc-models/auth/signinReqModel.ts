@@ -34,5 +34,5 @@ export function getSignInReqModel() {
   if (!ocDB) {
     throw new Error("Database not initialized");
   }
-  return ocDB.model<OCModels.SigninReq>("signinReq", signinReqModel);
+  return ocDB.model<OCModels.Auth.SigninReq>("signinReq", signinReqModel);
 }
