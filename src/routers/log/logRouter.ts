@@ -5,7 +5,12 @@ const router = express.Router();
 
 router.post("/logSignin", async (req, res) => {
   const SignInReqModel = getSignInReqModel();
-  console.log(req.body);
+  await new SignInReqModel({ ...req.body }).save();
+  return res.status(200).send();
+});
+
+router.post("/logInvalidPrompt", async (req, res) => {
+  const SignInReqModel = getSignInReqModel();
   await new SignInReqModel({ ...req.body }).save();
   return res.status(200).send();
 });

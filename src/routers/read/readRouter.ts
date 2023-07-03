@@ -1,9 +1,17 @@
 import express from "express";
+import { getSignInReqModel } from "../../oc-models/auth/signinReqModel";
 
 const router = express.Router();
 
-router.get("/usersWhoLoggedInLastDay", (req, res) => {});
-/* ם שנכנסו ביממה האחרונה
+router.get("/usersWhoLoggedInLastDay", async (_, res) => {
+  const SignInReqModel = getSignInReqModel();
+  const signins = await SignInReqModel.find();
+  const lastDay = signins.filter(
+    ({ time }) => time.getTime() > new Date().getTime() - 24 * 60 * 60 * 1000
+  );
+  return res.status(200).json({ total: lastDay.length, details: lastDay });
+});
+/*
 מקרים של פרומפט לא תקין
 כמות הטוקנים ששילמנו לopen ai
 כמות התוקנים שהשתמשו לנו
