@@ -1,18 +1,23 @@
 import express from "express";
 import { getSignInReqModel } from "../../oc-models/auth/signinReqModel";
+import { getInvalidPromptModel } from "../../oc-models/data/prompts/invalidPromptModel";
 
 const router = express.Router();
 
 router.get("/usersWhoLoggedInLastDay", async (_, res) => {
-  const SignInReqModel = getSignInReqModel();
-  const signins = await SignInReqModel.find();
+  const signInReqModel = getSignInReqModel();
+  const signins = await signInReqModel.find();
   const lastDay = signins.filter(
     ({ time }) => time.getTime() > new Date().getTime() - 24 * 60 * 60 * 1000
   );
   return res.status(200).json({ total: lastDay.length, details: lastDay });
 });
+
+router.get("/invalidPromptEvents", async (_, res) => {
+  const invalidPromptModel = getInvalidPromptModel();
+  return res.status(200).json({ events: await invalidPromptModel.find() });
+});
 /*
-מקרים של פרומפט לא תקין
 כמות הטוקנים ששילמנו לopen ai
 כמות התוקנים שהשתמשו לנו
 כל המידע על יוזרים 

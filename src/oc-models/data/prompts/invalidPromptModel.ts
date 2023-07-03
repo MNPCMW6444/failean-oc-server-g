@@ -8,7 +8,15 @@ const invalidPromptModel = new mongoose.Schema(
       type: String,
       required: true,
     },
+    stringifiedCompletion: {
+      type: String,
+      required: true,
+    },
     prompt: {
+      type: String,
+      required: true,
+    },
+    result: {
       type: String,
       required: true,
     },
