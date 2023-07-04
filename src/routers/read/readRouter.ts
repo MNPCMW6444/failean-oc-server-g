@@ -1,6 +1,7 @@
 import express from "express";
 import { getSignInReqModel } from "../../oc-models/auth/signinReqModel";
 import { getInvalidPromptModel } from "../../oc-models/data/prompts/invalidPromptModel";
+import { getPromptPriceModel } from "../../oc-models/data/prompts/promptPriceModel";
 
 const router = express.Router();
 
@@ -16,6 +17,17 @@ router.get("/usersWhoLoggedInLastDay", async (_, res) => {
 router.get("/invalidPromptEvents", async (_, res) => {
   const invalidPromptModel = getInvalidPromptModel();
   return res.status(200).json({ events: await invalidPromptModel.find() });
+});
+
+router.post("/getAVGPriceForPrompt", async (req, res) => {
+  const { promptName } = req.body;
+  const promptPriceModel = getPromptPriceModel();
+  const prices = await promptPriceModel.find({ promptName });
+  let avg = 0;
+  prices.forEach(({ forAVGPriceInOpenAITokens }) => {
+    avg += forAVGPriceInOpenAITokens;
+  });
+  return res.status(200).json({ avg });
 });
 /*
 כמות הטוקנים ששילמנו לopen ai

@@ -38,7 +38,7 @@ export function getInvalidPromptModel() {
   if (!ocDB) {
     throw new Error("Database not initialized");
   }
-  return ocDB.model<OCModels.Data.InvalidPrompt>(
+  return ocDB.model<OCModels.Data.Prompts.InvalidPrompt>(
     "invalidPrompt",
     invalidPromptModel
   );

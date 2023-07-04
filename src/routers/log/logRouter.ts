@@ -2,6 +2,7 @@ import express from "express";
 import { getSignInReqModel } from "../../oc-models/auth/signinReqModel";
 import { getInvalidPromptModel } from "../../oc-models/data/prompts/invalidPromptModel";
 import { getRestRequestModel } from "../../oc-models/restRequestModel";
+import { getPromptPriceModel } from "../../oc-models/data/prompts/promptPriceModel";
 
 const router = express.Router();
 
@@ -33,6 +34,16 @@ router.post("/logInvalidPrompt", async (req, res) => {
     await new invalidPromptModel({ ...req.body }).save();
   } catch (e) {
     console.log("failed to log logInvalidPrompt");
+    return res.status(200).send();
+  }
+});
+
+router.post("/logPromptPrice", async (req, res) => {
+  try {
+    const promptPriceModel = getPromptPriceModel();
+    await new promptPriceModel({ ...req.body }).save();
+  } catch (e) {
+    console.log("failed to log logPromptPrice");
     return res.status(200).send();
   }
 });
