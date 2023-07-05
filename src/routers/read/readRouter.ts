@@ -24,8 +24,8 @@ router.post("/getAVGPriceForPrompt", async (req, res) => {
   const promptPriceModel = getPromptPriceModel();
   const prices = await promptPriceModel.find({ promptName });
   let avg = 0;
-  prices.forEach(({ forAVGPriceInOpenAITokens }) => {
-    avg += forAVGPriceInOpenAITokens;
+  prices.forEach(({ priceInOpenAITokensForAVG }) => {
+    avg += priceInOpenAITokensForAVG;
   });
   return res.status(200).json({ avg });
 });

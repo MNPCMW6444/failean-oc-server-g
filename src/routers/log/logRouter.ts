@@ -3,16 +3,28 @@ import { getSignInReqModel } from "../../oc-models/auth/signinReqModel";
 import { getInvalidPromptModel } from "../../oc-models/data/prompts/invalidPromptModel";
 import { getExpressRequestModel } from "../../oc-models/expressRequestModel";
 import { getPromptPriceModel } from "../../oc-models/data/prompts/promptPriceModel";
+import { getExpressResponseModel } from "../../oc-models/expressResponseModel";
 
 const router = express.Router();
 
-router.post("/logReq", async (req, res) => {
+router.post("/logExpressRequest", async (req, res) => {
   try {
     const expressRequestModel = getExpressRequestModel();
     await new expressRequestModel({ ...req.body }).save();
     return res.status(200).send();
   } catch (e) {
-    console.log("failed to log logReq");
+    console.log("failed to log logExpressRequest");
+    return res.status(200).send();
+  }
+});
+
+router.post("/logExpressResponse", async (req, res) => {
+  try {
+    const expressResponseModel = getExpressResponseModel();
+    await new expressResponseModel({ ...req.body }).save();
+    return res.status(200).send();
+  } catch (e) {
+    console.log("failed to log logExpressResponse");
     return res.status(200).send();
   }
 });
