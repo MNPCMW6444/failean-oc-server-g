@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { OCModels } from "@failean/shared-types";
 import { ocDB } from "../dbConnection";
 
-const restRequestModel = new mongoose.Schema(
+const expressRequestModel = new mongoose.Schema(
   {
     stringified: {
       type: String,
@@ -14,9 +14,12 @@ const restRequestModel = new mongoose.Schema(
   }
 );
 
-export function getRestRequestModel() {
+export function getExpressRequestModel() {
   if (!ocDB) {
     throw new Error("Database not initialized");
   }
-  return ocDB.model<OCModels.RestRequest>("restRequest", restRequestModel);
+  return ocDB.model<OCModels.ExpressRequest>(
+    "ExpressRequest",
+    expressRequestModel
+  );
 }

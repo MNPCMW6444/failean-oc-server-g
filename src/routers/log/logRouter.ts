@@ -1,15 +1,15 @@
 import express from "express";
 import { getSignInReqModel } from "../../oc-models/auth/signinReqModel";
 import { getInvalidPromptModel } from "../../oc-models/data/prompts/invalidPromptModel";
-import { getRestRequestModel } from "../../oc-models/restRequestModel";
+import { getExpressRequestModel } from "../../oc-models/expressRequestModel";
 import { getPromptPriceModel } from "../../oc-models/data/prompts/promptPriceModel";
 
 const router = express.Router();
 
 router.post("/logReq", async (req, res) => {
   try {
-    const restRequestModel = getRestRequestModel();
-    await new restRequestModel({ ...req.body }).save();
+    const expressRequestModel = getExpressRequestModel();
+    await new expressRequestModel({ ...req.body }).save();
     return res.status(200).send();
   } catch (e) {
     console.log("failed to log logReq");

@@ -24,7 +24,7 @@ const invalidPromptModel = new mongoose.Schema(
       type: String,
       required: true,
     },
-    ideaId: {
+    ideaID: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
