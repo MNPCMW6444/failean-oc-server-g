@@ -18,14 +18,24 @@ connectToDBs();
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
+export const ocClientDomain =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:5998"
+    : "https://oc.failean.com";
+
 export const clientDomain =
   process.env.NODE_ENV === "development"
-    ? ["http://localhost:5998", "http://localhost:5999"]
-    : ["https://oc.failean.com", "https://dev.failean.com"];
+    ? "http://localhost:5999"
+    : "https://dev.failean.com";
+
+export const ocServerDomain =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:6777"
+    : "https://tstocserver.failean.com";
 
 app.use(
   cors({
-    origin: clientDomain,
+    origin: [clientDomain, ocClientDomain, ocServerDomain],
     credentials: true,
   })
 );
