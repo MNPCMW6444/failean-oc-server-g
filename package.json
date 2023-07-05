@@ -1,6 +1,6 @@
 {
   "name": "failean-ocserver",
-  "version": "1.0.59",
+  "version": "1.0.60",
   "scripts": {
     "clean": "rm -rf node_modules package-lock.json",
     "build": "npx ts-node build.ts",
@@ -29,8 +29,8 @@
     "exec": "./node_modules/.bin/ts-node ./src"
   },
   "dependencies": {
-    "@failean/mongo-models": "^1.6.118",
-    "@failean/shared-types": "^2.9.156",
+    "@failean/mongo-models": "^1.6.119",
+    "@failean/shared-types": "^2.9.157",
     "@sendgrid/mail": "^7.7.0",
     "@types/bcrypt": "^5.0.0",
     "@types/cookie-parser": "^1.4.3",
