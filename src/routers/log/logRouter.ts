@@ -4,6 +4,7 @@ import { getInvalidPromptModel } from "../../oc-models/data/prompts/invalidPromp
 import { getExpressRequestModel } from "../../oc-models/expressRequestModel";
 import { getPromptPriceModel } from "../../oc-models/data/prompts/promptPriceModel";
 import { getExpressResponseModel } from "../../oc-models/expressResponseModel";
+import { getOpenAICallModel } from "../../oc-models/data/prompts/openAICallModel";
 
 const router = express.Router();
 
@@ -22,6 +23,17 @@ router.post("/logExpressResponse", async (req, res) => {
   try {
     const expressResponseModel = getExpressResponseModel();
     await new expressResponseModel({ ...req.body }).save();
+    return res.status(200).send();
+  } catch (e) {
+    console.log("failed to log logExpressResponse");
+    return res.status(200).send();
+  }
+});
+
+router.post("/logOpenAICall", async (req, res) => {
+  try {
+    const openAiCallModel = getOpenAICallModel();
+    await new openAiCallModel({ ...req.body }).save();
     return res.status(200).send();
   } catch (e) {
     console.log("failed to log logExpressResponse");

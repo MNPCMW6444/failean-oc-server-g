@@ -4,7 +4,7 @@ import { ocDB } from "../../dbConnection";
 
 const signinReqModel = new mongoose.Schema(
   {
-    stringifiedReq: {
+    reqUUID: {
       type: String,
       required: true,
     },

@@ -4,8 +4,8 @@ import { ocDB } from "../../../dbConnection";
 
 const promptPriceModel = new mongoose.Schema(
   {
-    openAICallId: {
-      type: mongoose.Schema.Types.ObjectId,
+    openAICallReqUUID: {
+      type: String,
       require: true,
     },
     promptName: {

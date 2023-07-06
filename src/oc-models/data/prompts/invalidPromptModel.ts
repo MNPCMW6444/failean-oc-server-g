@@ -4,11 +4,7 @@ import { ocDB } from "../../../dbConnection";
 
 const invalidPromptModel = new mongoose.Schema(
   {
-    stringifiedReq: {
-      type: String,
-      required: true,
-    },
-    stringifiedCompletion: {
+    openAICallReqUUID: {
       type: String,
       required: true,
     },
