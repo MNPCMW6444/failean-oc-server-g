@@ -89,7 +89,7 @@ router.post("/logPage", async (req, res) => {
     const pageRenderModel = getPageRenderModel();
     await new pageRenderModel({ ...req.body }).save();
   } catch (e) {
-    console.log("failed to log logPage");
+    console.log("failed to log logPage: ");
     return res.status(200).send();
   }
 });
