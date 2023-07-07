@@ -5,6 +5,8 @@ import { getExpressRequestModel } from "../../oc-models/expressRequestModel";
 import { getPromptPriceModel } from "../../oc-models/data/prompts/promptPriceModel";
 import { getExpressResponseModel } from "../../oc-models/expressResponseModel";
 import { getOpenAICallModel } from "../../oc-models/data/prompts/openAICallModel";
+import { getSidebarClickModel } from "../../oc-models/client-analytics/sidebarClickModel";
+import { getSageRenderModel } from "../../oc-models/client-analytics/pageRender";
 
 const router = express.Router();
 
@@ -68,6 +70,26 @@ router.post("/logPromptPrice", async (req, res) => {
     await new promptPriceModel({ ...req.body }).save();
   } catch (e) {
     console.log("failed to log logPromptPrice");
+    return res.status(200).send();
+  }
+});
+
+router.post("/logSidebar", async (req, res) => {
+  try {
+    const sidebarClickModel = getSidebarClickModel();
+    await new sidebarClickModel({ ...req.body }).save();
+  } catch (e) {
+    console.log("failed to log logSidebar");
+    return res.status(200).send();
+  }
+});
+
+router.post("/logPage", async (req, res) => {
+  try {
+    const pageRenderModel = getSageRenderModel();
+    await new pageRenderModel({ ...req.body }).save();
+  } catch (e) {
+    console.log("failed to log logPage");
     return res.status(200).send();
   }
 });
