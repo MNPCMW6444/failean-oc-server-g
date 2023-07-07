@@ -6,7 +6,7 @@ import { getPromptPriceModel } from "../../oc-models/data/prompts/promptPriceMod
 import { getExpressResponseModel } from "../../oc-models/expressResponseModel";
 import { getOpenAICallModel } from "../../oc-models/data/prompts/openAICallModel";
 import { getSidebarClickModel } from "../../oc-models/client-analytics/sidebarClickModel";
-import { getSageRenderModel } from "../../oc-models/client-analytics/pageRender";
+import { getPageRenderModel } from "../../oc-models/client-analytics/pageRenderModel";
 
 const router = express.Router();
 
@@ -86,7 +86,7 @@ router.post("/logSidebar", async (req, res) => {
 
 router.post("/logPage", async (req, res) => {
   try {
-    const pageRenderModel = getSageRenderModel();
+    const pageRenderModel = getPageRenderModel();
     await new pageRenderModel({ ...req.body }).save();
   } catch (e) {
     console.log("failed to log logPage");

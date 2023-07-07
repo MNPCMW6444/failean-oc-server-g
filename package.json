@@ -1,6 +1,6 @@
 {
   "name": "failean-ocserver",
-  "version": "1.0.60",
+  "version": "1.0.62",
   "scripts": {
     "clean": "rm -rf node_modules package-lock.json",
     "build": "npx ts-node build.ts",

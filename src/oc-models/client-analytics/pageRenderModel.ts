@@ -14,7 +14,7 @@ const pageRenderModel = new mongoose.Schema(
   }
 );
 
-export function getSageRenderModel() {
+export function getPageRenderModel() {
   if (!ocDB) {
     throw new Error("Database not initialized");
   }

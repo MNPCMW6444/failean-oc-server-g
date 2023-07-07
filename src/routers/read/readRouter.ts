@@ -8,6 +8,8 @@ import { CreateChatCompletionResponse } from "openai";
 import { getUserModel } from "../../mongo-models/auth/userModel";
 import { getTokenModel } from "../../mongo-models/accounts/tokenModel";
 import { getIdeaModel } from "../../mongo-models/data/ideas/ideaModel";
+import { getSidebarClickModel } from "../../oc-models/client-analytics/sidebarClickModel";
+import { getPageRenderModel } from "../../oc-models/client-analytics/pageRenderModel";
 
 const router = express.Router();
 
@@ -57,6 +59,14 @@ router.get("/tokens", async (_, res) =>
 
 router.get("/ideas", async (_, res) =>
   res.status(200).json({ ideas: await getIdeaModel().find() })
+);
+
+router.get("/sidebars", async (_, res) =>
+  res.status(200).json({ ideas: await getSidebarClickModel().find() })
+);
+
+router.get("/renders", async (_, res) =>
+  res.status(200).json({ ideas: await getPageRenderModel().find() })
 );
 
 router.get("/avgIdeasPerUser", async (_, res) =>
