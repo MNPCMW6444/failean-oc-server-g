@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import mongoose, { ConnectOptions } from "mongoose";
 import cookieParser from "cookie-parser";
+import basicAuth from "express-basic-auth";
 import logRouter from "./routers/log/logRouter";
 import readRouter from "./routers/read/readRouter";
 import { connectToDBs } from "./dbConnection";
@@ -37,6 +37,13 @@ app.use(
   cors({
     origin: [clientDomain, ocClientDomain, ocServerDomain],
     credentials: true,
+  })
+);
+
+app.use(
+  basicAuth({
+    users: { client: process.env.OCPASS + "" },
+    challenge: true,
   })
 );
 
