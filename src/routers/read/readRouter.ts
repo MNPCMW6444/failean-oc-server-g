@@ -27,31 +27,23 @@ router.get("/invalidPromptEvents", async (_, res) =>
 );
 
 router.post("/avgPriceForPrompt", async (req, res) => {
-  const promptName = req.body.promptName;
+  const promptNames = req.body.promptName;
   const promptPriceModel = getPromptPriceModel();
-  if (promptName[0][0]) {
-    const prices = await promptPriceModel.find();
-    let sum = 0;
-    for (let i = 0; i < promptName.length; i++) {
-      const forSum = prices.filter(
-        ({ promptName }) => promptName === promptName[i]
-      );
-      let avg = 0;
-      forSum.forEach(({ priceInOpenAITokensForAVG }) => {
-        avg += priceInOpenAITokensForAVG;
-      });
-      avg /= forSum.length;
-      sum += avg;
-    }
-    return res.status(200).json({ avg: sum });
-  } else {
-    const prices = await promptPriceModel.find({ avg: promptName });
+  const prices = await promptPriceModel.find();
+  let sum = 0;
+  for (let i = 0; i < promptNames.length; i++) {
+    const forSum = prices.filter(
+      ({ promptName }) => promptName === promptNames[i]
+    );
     let avg = 0;
-    prices.forEach(({ priceInOpenAITokensForAVG }) => {
+    forSum.forEach(({ priceInOpenAITokensForAVG }) => {
       avg += priceInOpenAITokensForAVG;
     });
-    return res.status(200).json({ avg });
+    avg /= forSum.length;
+    sum += avg;
   }
+  console.log(sum);
+  return res.status(200).json({ avg: sum || "no" });
 });
 
 router.get("/numberOfOpenAITokensWeUsed", async (_, res) => {
