@@ -58,6 +58,7 @@ router.post("/logInvalidPrompt", async (req, res) => {
   try {
     const invalidPromptModel = getInvalidPromptModel();
     await new invalidPromptModel({ ...req.body }).save();
+    return res.status(200).send();
   } catch (e) {
     console.log("failed to log logInvalidPrompt");
     return res.status(200).send();

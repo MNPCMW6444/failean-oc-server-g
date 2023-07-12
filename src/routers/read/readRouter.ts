@@ -22,9 +22,10 @@ router.get("/usersWhoLoggedInLastDay", async (_, res) => {
   return res.status(200).json({ total: lastDay.length, details: lastDay });
 });
 
-router.get("/invalidPromptEvents", async (_, res) =>
+router.get("/invalidPromptEvents", async (_, res) =>{
+ const invalidPromptModel = getInvalidPromptModel();
   res.status(200).json({ events: await getInvalidPromptModel().find() })
-);
+});
 
 router.post("/avgPriceForPrompt", async (req, res) => {
   const promptNames = req.body.promptName;
