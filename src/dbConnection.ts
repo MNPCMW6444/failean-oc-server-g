@@ -6,7 +6,7 @@ export let safeDB: mongoose.Connection | null = null;
 export const connectToDBs = async () => {
   try {
     ocDB = await mongoose.createConnection(
-      `mongodb://${process.env.OC_USER}:${process.env.OC_PASS}@${process.env.OC_HOST}:${process.env.OC_PORT}/x?ssl=true`,
+      `mongodb://localhost:27017/oc?ssl=true`,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -15,7 +15,7 @@ export const connectToDBs = async () => {
     );
 
     safeDB = await mongoose.createConnection(
-      `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/x?ssl=true`,
+      `mongodb://localhost:27017/main?ssl=true`,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
