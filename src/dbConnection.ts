@@ -10,7 +10,6 @@ export const connectToDBs = async () => {
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        tls: true,
       } as ConnectOptions
     );
 
@@ -19,7 +18,6 @@ export const connectToDBs = async () => {
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        tls: true,
       } as ConnectOptions
     );
 
