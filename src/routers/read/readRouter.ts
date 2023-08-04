@@ -22,9 +22,9 @@ router.get("/usersWhoLoggedInLastDay", async (_, res) => {
   return res.status(200).json({ total: lastDay.length, details: lastDay });
 });
 
-router.get("/invalidPromptEvents", async (_, res) =>{
- const invalidPromptModel = getInvalidPromptModel();
-  res.status(200).json({ events: await getInvalidPromptModel().find() })
+router.get("/invalidPromptEvents", async (_, res) => {
+  const invalidPromptModel = getInvalidPromptModel();
+  res.status(200).json({ events: await getInvalidPromptModel().find() });
 });
 
 router.post("/avgPriceForPrompt", async (req, res) => {
@@ -90,8 +90,10 @@ router.get("/avgIdeasPerUser", async (_, res) =>
 );
 
 router.get("/userWithMostIdeas", async (_, res) => {
-  const ideas = await getIdeaModel().find();
-  const users = await getUserModel().find();
+  const IdeaModel = getIdeaModel();
+  const UserModel = getUserModel();
+  const ideas = await IdeaModel.find();
+  const users = await UserModel.find();
   let max = 0;
   let userID = "";
   users.forEach(({ _id }) => {
@@ -107,7 +109,8 @@ router.get("/userWithMostIdeas", async (_, res) => {
 });
 
 router.get("/usersWithZeroIdeas", async (_, res) => {
-  const ideas = await getIdeaModel().find();
+  const IdeaModel = getIdeaModel();
+  const ideas = await IdeaModel.find();
   return res.status(200).json({
     usersWithZero: (await getUserModel().find()).filter(
       ({ _id }) => ideas.filter(({ owner }) => owner === _id).length === 0
@@ -116,7 +119,8 @@ router.get("/usersWithZeroIdeas", async (_, res) => {
 });
 
 router.get("/usersWithOneIdeas", async (_, res) => {
-  const ideas = await getIdeaModel().find();
+  const IdeaModel = getIdeaModel();
+  const ideas = await IdeaModel.find();
   return res.status(200).json({
     usersWithOne: (await getUserModel().find()).filter(
       ({ _id }) => ideas.filter(({ owner }) => owner === _id).length === 1

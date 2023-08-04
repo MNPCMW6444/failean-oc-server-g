@@ -17,7 +17,7 @@ router.post("/logExpressRequest", async (req, res) => {
     return res.status(200).send();
   } catch (e) {
     console.log("failed to log logExpressRequest");
-    return res.status(200).send();
+    return res.status(500).send();
   }
 });
 
@@ -28,7 +28,7 @@ router.post("/logExpressResponse", async (req, res) => {
     return res.status(200).send();
   } catch (e) {
     console.log("failed to log logExpressResponse");
-    return res.status(200).send();
+    return res.status(500).send();
   }
 });
 
@@ -39,7 +39,7 @@ router.post("/logOpenAICall", async (req, res) => {
     return res.status(200).send();
   } catch (e) {
     console.log("failed to log logExpressResponse");
-    return res.status(200).send();
+    return res.status(500).send();
   }
 });
 
@@ -49,8 +49,8 @@ router.post("/logSignin", async (req, res) => {
     await new signInReqModel({ ...req.body }).save();
     return res.status(200).send();
   } catch (e) {
-    console.log("failed to log logSignin");
-    return res.status(200).send();
+    console.log("failed to log logSignin:");
+    return res.status(500).send();
   }
 });
 
@@ -61,7 +61,7 @@ router.post("/logInvalidPrompt", async (req, res) => {
     return res.status(200).send();
   } catch (e) {
     console.log("failed to log logInvalidPrompt");
-    return res.status(200).send();
+    return res.status(500).send();
   }
 });
 
@@ -71,7 +71,7 @@ router.post("/logPromptPrice", async (req, res) => {
     await new promptPriceModel({ ...req.body }).save();
   } catch (e) {
     console.log("failed to log logPromptPrice");
-    return res.status(200).send();
+    return res.status(500).send();
   }
 });
 
@@ -81,7 +81,7 @@ router.post("/logSidebar", async (req, res) => {
     await new sidebarClickModel({ ...req.body }).save();
   } catch (e) {
     console.log("failed to log logSidebar");
-    return res.status(200).send();
+    return res.status(500).send();
   }
 });
 
@@ -89,9 +89,10 @@ router.post("/logPage", async (req, res) => {
   try {
     const pageRenderModel = getPageRenderModel();
     await new pageRenderModel({ ...req.body }).save();
+    return res.status(200).send();
   } catch (e) {
     console.log("failed to log logPage: ");
-    return res.status(200).send();
+    return res.status(500).send();
   }
 });
 
