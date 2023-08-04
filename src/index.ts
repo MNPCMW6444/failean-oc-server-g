@@ -53,7 +53,9 @@ app.use(
   })
 );
 
-app.listen(port, () => console.log(`Server started on port: ${port}`));
+app.listen(port as any, "0.0.0.0", () =>
+  console.log(`Server started on port: ${port}`)
+);
 
 app.get("/areyoualive", (_, res) => {
   res.json({ answer: "yes", version: process.env.npm_package_version });
