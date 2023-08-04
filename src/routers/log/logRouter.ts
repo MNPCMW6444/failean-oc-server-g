@@ -49,7 +49,7 @@ router.post("/logSignin", async (req, res) => {
     await new signInReqModel({ ...req.body }).save();
     return res.status(200).send();
   } catch (e) {
-    console.log("failed to log logSignin:");
+    console.log("failed to log logSignin: ", e);
     return res.status(500).send();
   }
 });
