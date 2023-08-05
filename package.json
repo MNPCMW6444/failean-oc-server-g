@@ -1,6 +1,6 @@
 {
   "name": "failean-ocserver",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "scripts": {
     "v..": "npm version patch --no-git-tag-version",
     "v.": "npm version minor --no-git-tag-version",
