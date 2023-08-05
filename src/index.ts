@@ -46,6 +46,13 @@ app.use(
   })
 );
 
+app.use(
+  basicAuth({
+    users: { client: process.env.OCPASS + "xx" },
+    challenge: true,
+  })
+);
+
 app.listen(port as any, "0.0.0.0", () =>
   console.log(`Server started on port: ${port}`)
 );
