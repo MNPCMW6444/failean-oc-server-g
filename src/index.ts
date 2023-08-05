@@ -10,7 +10,7 @@ import { connectToDBs } from "./dbConnection";
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 6777;
+const port = 6777;
 app.use(cookieParser());
 
 connectToDBs();
