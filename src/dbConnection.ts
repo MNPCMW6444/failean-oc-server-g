@@ -6,8 +6,8 @@ export let safeDB: mongoose.Connection | null = null;
 
 export const connectToDBs = async () => {
   const mongoIp = await discoverService("us-east-1", {
-    NamespaceName: "dev",
-    ServiceName: "mongo-s",
+    NamespaceName: "tst",
+    ServiceName: "mongo",
     MaxResults: 10,
   });
 
