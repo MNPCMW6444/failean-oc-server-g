@@ -12,6 +12,7 @@ export const connectToDBs = async () => {
   });
 
   try {
+    console.log("Trying to connect safemain and oc mongodbs...");
     ocDB = await mongoose.createConnection(
       `mongodb://${mongoIp}:27017/failean-oc-tst?retryWrites=true&w=majority`,
       {
@@ -20,6 +21,11 @@ export const connectToDBs = async () => {
       } as ConnectOptions
     );
 
+    ocDB.on("error", console.error.bind(console, "connection error:"));
+    ocDB.once("open", function () {
+      // we're connected!
+      console.log("oc DB connected successfully");
+    });
     safeDB = await mongoose.createConnection(
       `mongodb://${mongoIp}:27017/failean-tst?retryWrites=true&w=majority`,
       {
@@ -28,7 +34,11 @@ export const connectToDBs = async () => {
       } as ConnectOptions
     );
 
-    console.log("connected to main-mongo and oc-mongo");
+    safeDB.on("error", console.error.bind(console, "connection error:"));
+    safeDB.once("open", function () {
+      // we're connected!
+      console.log("safe main DB connected successfully");
+    });
   } catch (e) {
     console.error(e);
     setTimeout(connectToDBs, 180000);
