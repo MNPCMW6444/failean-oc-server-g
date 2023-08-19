@@ -46,12 +46,23 @@ app.use(
   })
 );
 
-app.use(
-  basicAuth({
-    users: { client: process.env.OCPASS + "xx" },
-    challenge: true,
-  })
-);
+
+app.use((req, res, next) => {
+    if (req.path === '/areyoualive') {
+        return next();
+    }
+
+    const credentials = basicAuth(req as any) as any;
+    if (credentials && credentials.name === "client" && credentials.pass === process.env.OCPASS + "xx") {
+        return next();
+    }
+
+    res.setHeader('WWW-Authenticate', 'Basic realm="example"');
+    res.status(401).send('Authentication required');
+});
+
+
+
 
 app.listen(port as any, "0.0.0.0", () =>
   console.log(`Server started on port: ${port}`)
