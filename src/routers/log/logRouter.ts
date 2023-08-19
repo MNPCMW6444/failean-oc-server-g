@@ -96,4 +96,15 @@ router.post("/logPage", async (req, res) => {
   }
 });
 
+router.post("/logStripe", async (req, res) => {
+  try {
+    const pageRenderModel = getPageRenderModel();
+    await new pageRenderModel({ ...req.body }).save();
+    return res.status(200).send();
+  } catch (e) {
+    console.log("failed to log logPage: ");
+    return res.status(500).send();
+  }
+});
+
 export default router;
