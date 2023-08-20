@@ -2,10 +2,12 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import basicAuth from "express-basic-auth";
 import logRouter from "./routers/log/logRouter";
 import readRouter from "./routers/read/readRouter";
 import { connectToDBs } from "./dbConnection";
+import { Request, Response, NextFunction } from 'express';
+const basicAuth = require('basic-auth');
+
 
 dotenv.config();
 
@@ -47,13 +49,17 @@ app.use(
 );
 
 
-app.use((req, res, next) => {
+
+
+
+app.use((req: Request, res: Response, next: NextFunction) => {
     if (req.path === '/areyoualive') {
         return next();
     }
 
-    const credentials = basicAuth(req as any) as any;
-    if (credentials && credentials.name === "client" && credentials.pass === process.env.OCPASS + "xx") {
+    const credentials = basicAuth(req);
+
+    if (credentials && credentials.name === 'client' && credentials.pass === `${process.env.OCPASS}xx`) {
         return next();
     }
 

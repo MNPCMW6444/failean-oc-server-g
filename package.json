@@ -44,6 +44,7 @@
     "@types/jsonwebtoken": "^9.0.2",
     "@types/uuid": "^9.0.2",
     "@types/zxcvbn": "^4.4.1",
+    "basic-auth": "^2.0.1",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -62,5 +63,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "@types/basic-auth": "^1.1.3"
+  }
 }
