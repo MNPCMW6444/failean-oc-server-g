@@ -16,7 +16,7 @@ router.post("/logExpressRequest", async (req, res) => {
     await new expressRequestModel({ ...req.body }).save();
     return res.status(200).send();
   } catch (e) {
-    console.log("failed to log logExpressRequest");
+    console.log("failed to log logExpressRequest "+ e);
     return res.status(500).send();
   }
 });
@@ -27,7 +27,7 @@ router.post("/logExpressResponse", async (req, res) => {
     await new expressResponseModel({ ...req.body }).save();
     return res.status(200).send();
   } catch (e) {
-    console.log("failed to log logExpressResponse");
+    console.log("failed to log logExpressResponse "+ e);
     return res.status(500).send();
   }
 });
@@ -38,7 +38,7 @@ router.post("/logOpenAICall", async (req, res) => {
     await new openAiCallModel({ ...req.body }).save();
     return res.status(200).send();
   } catch (e) {
-    console.log("failed to log logExpressResponse");
+    console.log("failed to log logExpressResponse "+ e);
     return res.status(500).send();
   }
 });
@@ -49,7 +49,7 @@ router.post("/logSignin", async (req, res) => {
     await new signInReqModel({ ...req.body }).save();
     return res.status(200).send();
   } catch (e) {
-    console.log("failed to log logSignin");
+    console.log("failed to log logSignin "+ e);
     return res.status(500).send();
   }
 });
@@ -60,7 +60,7 @@ router.post("/logInvalidPrompt", async (req, res) => {
     await new invalidPromptModel({ ...req.body }).save();
     return res.status(200).send();
   } catch (e) {
-    console.log("failed to log logInvalidPrompt");
+    console.log("failed to log logInvalidPrompt "+ e);
     return res.status(500).send();
   }
 });
@@ -70,7 +70,7 @@ router.post("/logPromptPrice", async (req, res) => {
     const promptPriceModel = getPromptPriceModel();
     await new promptPriceModel({ ...req.body }).save();
   } catch (e) {
-    console.log("failed to log logPromptPrice");
+    console.log("failed to log logPromptPrice "+ e);
     return res.status(500).send();
   }
 });
@@ -80,7 +80,7 @@ router.post("/logSidebar", async (req, res) => {
     const sidebarClickModel = getSidebarClickModel();
     await new sidebarClickModel({ ...req.body }).save();
   } catch (e) {
-    console.log("failed to log logSidebar");
+    console.log("failed to log logSidebar "+ e);
     return res.status(500).send();
   }
 });
@@ -91,7 +91,7 @@ router.post("/logPage", async (req, res) => {
     await new pageRenderModel({ ...req.body }).save();
     return res.status(200).send();
   } catch (e) {
-    console.log("failed to log logPage: ");
+    console.log("failed to log logPage:  "+ e);
     return res.status(500).send();
   }
 });
@@ -102,7 +102,7 @@ router.post("/logStripe", async (req, res) => {
     await new pageRenderModel({ ...req.body }).save();
     return res.status(200).send();
   } catch (e) {
-    console.log("failed to log logPage: ");
+    console.log("failed to log logPage:  "+ e);
     return res.status(500).send();
   }
 });
