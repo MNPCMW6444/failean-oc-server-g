@@ -43,6 +43,6 @@ stages:
           - task: Docker@2
             inputs:
               command: 'push'
-              repository: 'failean.azurecr.io/mainserver'
+              repository: 'failean.azurecr.io/ocserver'
               tags: |
                 $(tag)
