@@ -3,7 +3,7 @@ WORKDIR /app
 COPY package.json /app/package.json
 COPY tsconfig.json /app/tsconfig.json
 COPY tsconfig.prod.json /app/tsconfig.prod.json
-COPY build.ts /app/build.ts
+COPY .npmrc /app/.npmrc
 COPY src /app/src
 RUN npm run prod
 RUN npm run clean:prod
