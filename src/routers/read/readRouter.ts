@@ -4,7 +4,7 @@ import { getInvalidPromptModel } from "../../oc-models/data/prompts/invalidPromp
 import { getPromptPriceModel } from "../../oc-models/data/prompts/promptPriceModel";
 import { getOpenAICallModel } from "../../oc-models/data/prompts/openAICallModel";
 import { OCModels } from "@failean/shared-types";
-import { CreateChatCompletionResponse } from "openai";
+import OpenAI from "openai";
 import { getUserModel } from "../../mongo-models/auth/userModel";
 import { getTokenModel } from "../../mongo-models/accounts/tokenModel";
 import { getIdeaModel } from "../../mongo-models/data/ideas/ideaModel";
@@ -50,7 +50,7 @@ router.post("/avgPriceForPrompt", async (req, res) => {
 router.get("/numberOfOpenAITokensWeUsed", async (_, res) => {
   const openAICallModel = getOpenAICallModel();
   const total = await openAICallModel.find();
-  const completions: CreateChatCompletionResponse[] = total.map(
+  const completions: OpenAI.Chat.Completions.ChatCompletion[] = total.map(
     (doc): OCModels.Data.Prompts.OpenAICall =>
       JSON.parse(doc.stringifiedCompletion)
   ) as any;

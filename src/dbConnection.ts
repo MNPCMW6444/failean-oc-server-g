@@ -1,20 +1,16 @@
 import mongoose, { ConnectOptions } from "mongoose";
-import { discoverService } from "./AWSDiscovery";
+import * as process from "process";
 
 export let ocDB: mongoose.Connection | null = null;
 export let safeDB: mongoose.Connection | null = null;
 
 export const connectToDBs = async () => {
-  const mongoIp = await discoverService("us-east-1", {
-    NamespaceName: "tst",
-    ServiceName: "mongo",
-    MaxResults: 10,
-  });
+
 
   try {
     console.log("Trying to connect safemain and oc mongodbs...");
     ocDB = await mongoose.createConnection(
-      `mongodb://${mongoIp}:27017/failean-oc-tst?retryWrites=true&w=majority`,
+      process.env.MONGOOC+"",
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -27,7 +23,7 @@ export const connectToDBs = async () => {
       console.log("oc DB connected successfully");
     });
     safeDB = await mongoose.createConnection(
-      `mongodb://${mongoIp}:27017/failean-tst?retryWrites=true&w=majority`,
+        process.env.MONGO+"",
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
