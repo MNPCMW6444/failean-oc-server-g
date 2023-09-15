@@ -40,11 +40,9 @@ router.post("/avgPriceForPrompt", async (req, res) => {
     forSum.forEach(({ forAVGPriceInOpenAITokens }) => {
       avg += forAVGPriceInOpenAITokens;
     });
-    console.log(avg)
     avg /= forSum.length;
-    sum += avg;
+    if(!isNaN(avg)) sum += avg;
   }
-  console.log(sum);
   return res.status(200).json({ avg: sum || "no" });
 });
 
