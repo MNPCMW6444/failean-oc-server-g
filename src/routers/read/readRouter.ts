@@ -37,9 +37,10 @@ router.post("/avgPriceForPrompt", async (req, res) => {
       ({ promptName }) => promptName === promptNames[i]
     );
     let avg = 0;
-    forSum.forEach(({ priceInOpenAITokensForAVG }) => {
-      avg += priceInOpenAITokensForAVG;
+    forSum.forEach(({ forAVGPriceInOpenAITokens }) => {
+      avg += forAVGPriceInOpenAITokens;
     });
+    console.log(avg)
     avg /= forSum.length;
     sum += avg;
   }
