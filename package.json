@@ -28,7 +28,7 @@
   "dependencies": {
     "@aws-sdk/client-servicediscovery": "^3.414.0",
     "@failean/mongo-models": "^1.6.129",
-    "@failean/shared-types": "^2.9.174",
+    "@failean/shared-types": "^2.9.175",
     "@sendgrid/mail": "^7.7.0",
     "@types/bcrypt": "^5.0.0",
     "@types/cookie-parser": "^1.4.4",
